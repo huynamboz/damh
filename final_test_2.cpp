@@ -2,26 +2,38 @@
 #include <string.h>
 #include<conio.h>
 
+char sex[10];
+int count; 
+int d=0;
+int dem[100];
+int soluong;
+int chon;
+
 struct hovaten {
     char ten[50];
     int stt[50];
 };
+
 struct noiDung
 {
     char nd[50]; // nội dung sở thích
     int stt[100]; //số thứ tự của mỗi thằng
 };
+
 struct SoThich
 {
     int sl[100]; // sô lượng sở thích của từng thằng
     noiDung x[10]; //từng sở thích của mỗi nhóm hobbie[i]
 };
+
 //-----cái struct có chữ Check hoặc _c phía sau dùng để lưu dữ liệu nhập vào --///
+
 struct noiDungCheck
 {
     char nd_c[50]; //
     int sl_c[100];
 };
+
 struct SoThichCheck
 {
     noiDungCheck xCheck[10];
@@ -36,38 +48,15 @@ void xoaxuongDong (char x[]){
         x[len-1]='\0';
     }
 }
-int main(){
-  
-    hovaten hoten[10];
-    SoThich hobbie[10]; // số nhóm sở thích ( mỗi nhóm là các sở thích của 1 thằng)
-    SoThichCheck hobbie_c; // tương tự cái hobbie nhưng có _c phía sau có nghĩa là check để lưu các sở thích nhập vào, vì mình nhập vào có 1 đứa nên k dùng mảng cho hobbie_c
-   int stt,a;
 
+hovaten hoten[10];
+SoThich hobbie[10]; // số nhóm sở thích ( mỗi nhóm là các sở thích của 1 thằng)
+SoThichCheck hobbie_c; // tương tự cái hobbie nhưng có _c phía sau có nghĩa là check để lưu các sở thích nhập vào, vì mình nhập vào có 1 đứa nên k dùng mảng cho hobbie_c
 
-
-//--code đọc data nhập vào---//  
-      char sex[10];
-      char choose;
-      printf("nhap ten :");
-      gets(hobbie_c.name);
-      printf("nhap gioi tinh :");
-      fflush(stdin);
-      scanf("%s",sex);
-    int soluong;
-    printf("nhap so luong so thich :");
-    scanf("%d",&soluong);
-    printf("nhap so thich :");
-    for (int i = 1; i <= soluong; i++)
-    {
-      fflush(stdin);
-      gets(hobbie_c.xCheck[i].nd_c);
-    }
-//---kết thúc code đọc data nhập vào--//
-
-  
-    
 //---code đọc data từ file--//
-  int i=0,count; 
+
+void docfile(){
+    int i=0;
   if (sex[1] == 'u')
   {
       FILE *st = fopen("nam.txt","r");
@@ -85,6 +74,7 @@ int main(){
          xoaxuongDong(hobbie[i].x[j].nd);
        }
      } fclose(st);
+     
   } else {
     FILE *st = fopen("nu.txt","r");
     while(!feof(st))
@@ -100,14 +90,13 @@ int main(){
          xoaxuongDong(hobbie[i].x[j].nd);
         }
      } fclose(st);
+
   }
+}
 //--- kết thúc code đọc data từ file---//
-  
 
-
-
-//----code tìm sở thích giống nhiều nhất--//
-int dem[100];
+ //----code tìm sở thích giống nhiều nhất--//
+void search(){
 for (int i = 1; i <= count; i++)
 {
         for (int  j = 1; j <= soluong; j++)
@@ -122,13 +111,13 @@ for (int i = 1; i <= count; i++)
             }
         }
 }
-//---kết thúc code đọc sở thích giống nhiều nhất---//
+}//---kết thúc code đọc sở thích giống nhiều nhất---//
 
-//----tìm những thằng giống nhất để in ra--//
-int d=0;
+  //----tìm những thằng giống nhất để in ra--//
+void xuat(){
 int soTT=1;
 int max=dem[1];
-for (int i = 1; i <= count-1; i++)
+for (int i = 1; i <= count; i++)
 {
     if (dem[i]>max)
     {
@@ -137,40 +126,160 @@ for (int i = 1; i <= count-1; i++)
     }
 //  printf("%d\n",dem[i]);   
 } 
-for (int i = 1; i <= count-1; i++)
+for (int i = 1; i <= count; i++)
 {
     if ( dem[i] == max ){
-          printf("%d %s ->> So thich : ",++d,hoten[i].ten);
+          printf("%d. %s ->> So thich : ",++d,hoten[i].ten);
              for (int j = 1; j <=hobbie[i].sl[i]; j++)
                {
                    printf("%s, ",hobbie[i].x[j].nd);
-               } printf("\n----------------\n");
+               }   printf("\n----------------\n");
+       }
+}
+}
+
+
+//--code đọc data nhập vào---//  
+     
+void nhap(){
+      printf("nhap ten :");
+      fflush(stdin);
+      gets(hobbie_c.name);
+      printf("nhap gioi tinh :");
+      fflush(stdin);
+      scanf("%s",sex);
+    
+    printf("nhap so luong so thich :");
+    scanf("%d",&soluong);
+    printf("nhap so thich :");
+    for (int i = 1; i <= soluong; i++)
+    {
+      fflush(stdin);
+      gets(hobbie_c.xCheck[i].nd_c);
     }
+}
+//---kết thúc code đọc data nhập vào--//
+
+//ghi thêm dữ liệu mới vào file
+void ghifile(){
+    if (sex[1] == 'u')
+    {
+        FILE *st = fopen("nu.txt","a");
+        sex[1]='a';
+        docfile();
+        sex[1]='u';
+        int stt=count;
+         for (int i = 1; i <2; i++)
+           {
+            fprintf(st,"\n%d %d",++stt,soluong);
+            fprintf(st," %s",hobbie_c.name);
+          for (int j = 1; j <=soluong; j++)
+             {
+                fprintf(st,"\n%s",hobbie_c.xCheck[j].nd_c);
+           
+             } 
+            }
+     fclose(st);
+    } 
+    
+    else {
+          FILE *st = fopen("nam.txt","a");
+        sex[1]='u';
+        docfile();
+        sex[1]='a';
+        int stt=count;
+         for (int i = 1; i <2; i++)
+           {
+            fprintf(st,"\n%d %d",++stt,soluong);
+            fprintf(st," %s",hobbie_c.name);
+          for (int j = 1; j <=soluong; j++)
+             {
+                fprintf(st,"\n%s",hobbie_c.xCheck[j].nd_c);
+           
+             } 
+            }
+     fclose(st);
+    }
+}
+
+//====hàm in ra danh sách
+void inds(){
+    int stt=0;
+    printf("=======DANH SACH MAI MOI=========\n");
+     for (int i = 1; i <= count; i++)
+         {
+              printf("%d. %s\n",++stt,hoten[i].ten);
+              printf("so thich :");
+             for (int j = 1; j <=hobbie[i].sl[i]; j++)
+                 {
+                    printf(" %s,",hobbie[i].x[j].nd);
+                 } printf("\n----------------\n");
+           }
 }
 
 
 
+int main(){
 
+do {
+		printf("=============== MENU ===============");
+		printf("\n1. Thuc hien mai moi");
+		printf("\n2. Them ban vao danh sach mai moi");
+		printf("\n3. In ra danh sach mai moi");
+		printf("\n0. Thoat chuong trinh.");
+		printf("\nBan chon ? ");
+		
+		scanf("%d",&chon);
+		
+		
+		switch(chon) {
+			case 0:
+				break;
+				
+			case 1:{
+				nhap();
+				docfile();
+                search();
+                if (sex[1]== 'u')
+                {
+                     printf("\n-------Nhung chang trai hop voi ban <3---------\n\n");
+                } else printf("\n-------Nhung co gai hop voi ban <3---------\n\n");
+                
+                xuat();
+				break;
+            }
 
+			case 2:
+				nhap();
+                ghifile();
+                printf(".....Ghi thanh cong....\n");
+				break;
+				
+			case 3:
+                printf("Ban muon in ra danh sach nam hay nu: ");
+                scanf("%s",sex);
 
+                //====Đống này để cho code nó đọc đúng file cần in ra
+                // vì bình thường là mình nhập nam nó đọc nữ và ngược lại nên giờ phải đảo lại để nhập nữ đọc nữ, nhập nam đọc nam
+                if ( sex[1]== 'u') 
+                sex[1] ='a';
+                else if (sex [1] == 'a'){
+                sex[1]='u';
+                 }
+                 //===================//
 
-
-/*
-  for (int i = 1; i <= count; i++)
- 
-  
-   {
-       printf("ten: %s",hoten[i].ten);
-       printf("so thich :\n");
-       for (int j = 1; j <=hobbie[i].sl[i]; j++)
-       {
-           printf("%s",hobbie[i].x[j].nd);
-           
-       } printf("\n----------------\n");
-       
-      
-   }
-*/
+                docfile();
+                inds();
+				break;
+				
+			default:
+				printf("Sai chuc nang, vui long chon lai!\n");
+				break;
+		}
+		
+	} while(chon);
+	
+	return 0;
   
   
 }
