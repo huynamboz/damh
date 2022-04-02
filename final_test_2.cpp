@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include <string.h>
 #include<conio.h>
-
+#define space ' '
 char sex[10];
-int count; 
+int count=0; 
 int d=0;
 int dem[100];
 int soluong;
@@ -41,12 +41,15 @@ struct SoThichCheck
 };
 //---------------------------//
 
-void xoaxuongDong (char x[]){ 
-    size_t len = strlen(x);
-   // TITV\n\0 => TITV\E\0
-    if(x[len-1]=='\n'){
-        x[len-1]='\0';
-    }
+void xoakhoangtrang (char s[]){ 
+  // xoá các ký tự trống cuối chuỗi
+{
+    int i = strlen (s) - 1 ;
+    while (s[i] == space && i >= 0)
+        i-- ;
+// Lưu ý chỗ này nhé, không phải 'NULL' đâu
+    s[i+1] = 0 ; // hoặc s[i+1] = '\0' ;
+}
 }
 
 hovaten hoten[10];
@@ -64,14 +67,16 @@ void docfile(){
    while(!feof(st))
      {
       i++;
-      fscanf(st,"%d %d",&hobbie[i].x[i].stt[i],&hobbie[i].sl[i]); //đọc số thứ tự và số lượng sở thích
-      fgets(hoten[i].ten,50, (FILE*)st ); // vì tên có nhiều từ nên phải dùng fgets để lấy hết chuỗi
-       xoaxuongDong(hoten[i].ten);// vì hàm fgets nó sẽ đọc luôn ký tự xuống dòng nên việc so sánh sẽ không đúng nên sẽ dùng hàm xoaxuongdong()
-      count = hobbie[i].x[i].stt[i]; //biến count để lưu số lượng person
+      fscanf(st,"%d %d %20[^\n]",&hobbie[i].x[i].stt[i],&hobbie[i].sl[i],&hoten[i].ten); //đọc số thứ tự và số lượng sở thích
+    //   fgets(hoten[i].ten,50, (FILE*)st ); // vì tên có nhiều từ nên phải dùng fgets để lấy hết chuỗi
+       xoakhoangtrang(hoten[i].ten);// vì hàm fgets nó sẽ đọc luôn ký tự xuống dòng nên việc so sánh sẽ không đúng nên sẽ dùng hàm xoakhoangtrang()
+      count ++; //biến count để lưu số lượng person
+      printf("%d\n",count);
        for (int j = 1; j <= hobbie[i].sl[i]; j++)
        {
-         fgets(hobbie[i].x[j].nd,50,(FILE*)st );
-         xoaxuongDong(hobbie[i].x[j].nd);
+             fscanf(st," %20[^\n]",hobbie[i].x[j].nd);
+        //  fgets(hobbie[i].x[j].nd,50,(FILE*)st );
+         xoakhoangtrang(hobbie[i].x[j].nd);
        }
      } fclose(st);
      
@@ -80,14 +85,16 @@ void docfile(){
     while(!feof(st))
      {
       i++;
-      fscanf(st,"%d %d",&hobbie[i].x[i].stt[i],&hobbie[i].sl[i]); 
-      fgets(hoten[i].ten,50, (FILE*)st );
-      xoaxuongDong(hoten[i].ten);
-      count = hobbie[i].x[i].stt[i];
+      fscanf(st,"%d %d %20[^\n]",&hobbie[i].x[i].stt[i],&hobbie[i].sl[i],&hoten[i].ten); 
+        
+    //   fgets(hoten[i].ten,50, (FILE*)st );
+      xoakhoangtrang(hoten[i].ten);
+      count ++;
         for (int j = 1; j <= hobbie[i].sl[i]; j++)
         {
-         fgets(hobbie[i].x[j].nd,50, (FILE*)st );
-         xoaxuongDong(hobbie[i].x[j].nd);
+              fscanf(st," %20[^\n]",&hobbie[i].x[j].nd);
+        //  fgets(hobbie[i].x[j].nd,50, (FILE*)st );
+        //  xoakhoangtrang(hobbie[i].x[j].nd);
         }
      } fclose(st);
 
@@ -172,10 +179,10 @@ void ghifile(){
          for (int i = 1; i <2; i++)
            {
             fprintf(st,"\n%d %d",++stt,soluong);
-            fprintf(st," %s",hobbie_c.name);
+            fprintf(st," %-20s",hobbie_c.name);
           for (int j = 1; j <=soluong; j++)
              {
-                fprintf(st,"\n%s",hobbie_c.xCheck[j].nd_c);
+                fprintf(st," %-20s",hobbie_c.xCheck[j].nd_c);
            
              } 
             }
@@ -190,11 +197,11 @@ void ghifile(){
         int stt=count;
          for (int i = 1; i <2; i++)
            {
-            fprintf(st,"\n%d %d",++stt,soluong);
-            fprintf(st," %s",hobbie_c.name);
+           fprintf(st,"\n%d %d",++stt,soluong);
+            fprintf(st," %-20s",hobbie_c.name);
           for (int j = 1; j <=soluong; j++)
              {
-                fprintf(st,"\n%s",hobbie_c.xCheck[j].nd_c);
+                fprintf(st," %-20s",hobbie_c.xCheck[j].nd_c);
            
              } 
             }
@@ -258,7 +265,7 @@ do {
 			case 3:
                 printf("Ban muon in ra danh sach nam hay nu: ");
                 scanf("%s",sex);
-
+                count =0;
                 //====Đống này để cho code nó đọc đúng file cần in ra
                 // vì bình thường là mình nhập nam nó đọc nữ và ngược lại nên giờ phải đảo lại để nhập nữ đọc nữ, nhập nam đọc nam
                 if ( sex[1]== 'u') 
