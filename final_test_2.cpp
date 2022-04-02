@@ -71,14 +71,13 @@ void docfile(){
     //   fgets(hoten[i].ten,50, (FILE*)st ); // vì tên có nhiều từ nên phải dùng fgets để lấy hết chuỗi
        xoakhoangtrang(hoten[i].ten);// vì hàm fgets nó sẽ đọc luôn ký tự xuống dòng nên việc so sánh sẽ không đúng nên sẽ dùng hàm xoakhoangtrang()
       count ++; //biến count để lưu số lượng person
-      printf("%d\n",count);
        for (int j = 1; j <= hobbie[i].sl[i]; j++)
        {
              fscanf(st," %20[^\n]",hobbie[i].x[j].nd);
         //  fgets(hobbie[i].x[j].nd,50,(FILE*)st );
          xoakhoangtrang(hobbie[i].x[j].nd);
        }
-     } fclose(st);
+     } fclose(st); count--;
      
   } else {
     FILE *st = fopen("nu.txt","r");
@@ -94,9 +93,9 @@ void docfile(){
         {
               fscanf(st," %20[^\n]",&hobbie[i].x[j].nd);
         //  fgets(hobbie[i].x[j].nd,50, (FILE*)st );
-        //  xoakhoangtrang(hobbie[i].x[j].nd);
+         xoakhoangtrang(hobbie[i].x[j].nd);
         }
-     } fclose(st);
+     } fclose(st); count--;
 
   }
 }
