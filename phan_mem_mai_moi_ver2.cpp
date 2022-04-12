@@ -33,7 +33,7 @@ struct noiDungCheck
 struct infoPerson_input
 {
     noiDungCheck tensoThich_input[10];
-    char name[50]; // tên đứa vừa nhập
+    char ten[50]; // tên đứa vừa nhập
     int tuoi;// tuoi scanf
     int tuoi_right;
     int tuoi_left;
@@ -165,7 +165,7 @@ void nhapSdt(){
 void nhap(){
     printf("nhap ten :");
     fflush(stdin);
-    gets(person_input.name);
+    gets(person_input.ten);
 
     printf("nhap gioi tinh :");
     fflush(stdin);
@@ -191,7 +191,7 @@ void ghidata(FILE *st){
          for (int i = 1; i <2; i++)
            {
                 fprintf(st,"\n0%d %d",person_input.sdt,soluong);
-                fprintf(st," %-20s %d",person_input.name,person_input.tuoi);
+                fprintf(st," %-20s %d",person_input.ten,person_input.tuoi);
              for (int j = 1; j <=soluong; j++)
                  {
                    fprintf(st," %-20s",person_input.tensoThich_input[j].nd_c);
