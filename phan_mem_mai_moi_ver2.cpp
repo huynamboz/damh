@@ -28,7 +28,6 @@ struct infoPerson
 struct noiDungCheck
 {
     char nd_c[50]; //
-    int sl_c[100];
 };
 
 struct infoPerson_input
@@ -89,33 +88,7 @@ void docfile(){
 
 
 
- //----code tìm sở thích giống nhiều nhất--//
 
-
-// void search(int dem[]){
-// int ok=0;
-// for (int i = 1; i <= count; i++)
-//   { 
-//     if( checkAge(i) == 1 ){
-//       soLuong[++ok] = i;
-//         for (int  j = 1; j <= soluong; j++)
-//         {
-//             for (int k =1 ; k <= person[i].sl[i] ; k++)
-//             { 
-//                if ( strcmp(person_input.tensoThich_input[j].nd_c,person[i].tenSoThich[k].nd) == 0) {
-//                    dem[i]++;
-//                    break;
-//                }
-//             }
-//         }
-//       } else soLuong[++ok] = 0;
-//   }
-//   for (int i = 1; i <= count; i++)
-//   {
-//     printf("soLuong[%d] = %d\n",i,soLuong[i]);
-//   }
-  
-// }//---kết thúc code đọc sở thích giống nhiều nhất---//
 
   //----tìm những thằng giống nhất để in ra--//
  int checkAge(int i){
@@ -160,13 +133,12 @@ for (int i = 1; i <= count; i++)
   } 
 if ( max ==0)
 {  
-  printf("Rat tiec :( khong co ai cung so thich voi ban ca!\n");
+  printf("Rat tiec :( khong co ai phu hop voi ban ca!\n");
 } else {
 for (int i = 1; i <= count; i++)
   {
      if(soThuTu_AgeOk[i]==1){
-       
-    if ( dem[i] == max )
+       if ( dem[i] == max )
         { 
           printf("%d. %s | tuoi : %d |so dien thoai : 0%d\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt);
              for (int j = 1; j <=person[i].sl[i]; j++)
