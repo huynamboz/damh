@@ -288,7 +288,7 @@ do {
                 // vì bình thường là mình nhập nam nó đọc nữ và ngược lại nên giờ phải đảo lại để nhập nữ đọc nữ, nhập nam đọc nam
                 if ( sex[1]== 'u') 
                 sex[1] ='a';
-                else if (sex [1] == 'a'){
+                else {
                 sex[1]='u';
                  }
                  //===================//
