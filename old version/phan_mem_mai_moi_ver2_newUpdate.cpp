@@ -281,13 +281,14 @@ printf("|                                                     |\n");
 printf("|=============== PHAN MEM MAI MOI 2022 ===============|\n");
 printf("|_____________________________________________________|");
 do {
-		printf("\n\n =============== MENU ===============");
-		  printf("\n|  1. Thuc hien mai moi              |");
-		  printf("\n|  2. Them ban vao danh sach mai moi |");
-		  printf("\n|  3. In ra danh sach mai moi        |");
-      printf("\n|  4. Xoa nguoi khoi danh sach       |");
-		  printf("\n|  0. Thoat chuong trinh.            |");
-		  printf("\n|____________________________________|");
+		printf("\n\n =============== MENU ================");
+		  printf("\n|  1. Thuc hien mai moi               |");
+		  printf("\n|  2. Them ban vao danh sach mai moi  |");
+		  printf("\n|  3. In ra danh sach mai moi         |");
+      	  printf("\n|  4. Xoa nguoi khoi danh sach        |");
+      	  printf("\n|  5. Thong tin doi ngu phat trien app|");
+		  printf("\n|  0. Thoat chuong trinh.             |");
+		  printf("\n|_____________________________________|");
 		  printf("\n  Ban chon ? ");
 		char sex[10];
 		scanf("%d",&chon);
@@ -333,10 +334,15 @@ do {
                 count=0;
 			        	break;
 
-      case 4:
+      		case 4:
                 xoaPerson();
                 count =0;
                 break;
+                
+            case 5:
+            	printf("Trinh Huy Nam : Code\nNguyen Dac Nhat Hoang : Thiet ke thuat toan");
+            	break;
+            	
 			default:
 			        	printf("Sai chuc nang, vui long chon lai!\n");
 			        	break;
