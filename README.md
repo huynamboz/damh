@@ -1,5 +1,5 @@
 -----<b>20/5/2022</b>-------------------</br>
-<img src="https://user-images.githubusercontent.com/38585889/169564676-2516be17-d23e-42a5-bedd-cd14a7418fbe.png" width="530px" />
+<img src="https://user-images.githubusercontent.com/38585889/169564676-2516be17-d23e-42a5-bedd-cd14a7418fbe.png" width="530px" /></br>
 ----30/4/2022----------------------------
 <p style="color:green;">update giao diện ver 3</p>
 <img src="https://user-images.githubusercontent.com/38585889/165884929-f1c8dc37-55de-491a-a545-179520c8db97.png" width="530" />
