@@ -3,13 +3,12 @@
 #include<conio.h>
 #define space ' '
 
-int count=0; 
-int d=0;
+int count=0; // so luong person
 int soLuongSoThich; //so luong so thich nguoi dung nhap vao
 int height; // chieu cao nguoi dùng nhập vào
 int soLuongCongViec; //so luong cong viec, nghe nghiep input
 int chon;
-char heightCheck[6]; // check xem người dùng muốn tren hay duoi ví dụ tren 160 hoac duoi 170 ( chiều cao)
+char heightCheck[6]; // check xem người dùng muốn trên hay dưới ví dụ tren 160 hoac duoi 170 ( chiều cao)
 
 
 struct noiDung
@@ -21,7 +20,7 @@ struct infoPerson
 {
     int sl_st; // sô lượng sở thích của từng thằng
     int sl_cv; // số luong công viec(nghề nghiệp)
-    noiDung tenSoThich[10]; //từng sở thích của mỗi nhóm person[i]
+    noiDung tenSoThich[10]; //từng sở thích của mỗi person[i]
     noiDung tenCongViec[10];
     int chieuCao;
     int tuoi;
@@ -29,7 +28,7 @@ struct infoPerson
     char ten[50];
 };
 
-//-----cái struct có chữ Check hoặc _c phía sau dùng để lưu dữ liệu nhập vào --///
+//-----struct lưu dữ liệu nhập từ bàn phím --///
 
 struct noiDungCheck
 {
@@ -57,8 +56,8 @@ void xoakhoangtrang (char s[]){
 }
 }
 
-infoPerson person[10]; // số nhóm sở thích ( mỗi nhóm là các sở thích của 1 thằng)
-infoPerson_input person_input; // 
+infoPerson person[100]; 
+infoPerson_input person_input; 
 
 //---code đọc data từ file--//
 void docdata(FILE *st){
@@ -66,8 +65,8 @@ void docdata(FILE *st){
   while(!feof(st))
      {
       i++;
-      fscanf(st,"%d %d %20[^\n] %d %d",&person[i].sdt,&person[i].tuoi,&person[i].ten,&person[i].chieuCao,&person[i].sl_st); //đọc số thứ tự và số lượng sở thích
-       xoakhoangtrang(person[i].ten);// vì hàm fgets nó sẽ đọc luôn ký tự xuống dòng nên việc so sánh sẽ không đúng nên sẽ dùng hàm xoakhoangtrang()
+      fscanf(st,"%d %d %20[^\n] %d %d",&person[i].sdt,&person[i].tuoi,&person[i].ten,&person[i].chieuCao,&person[i].sl_st); 
+       xoakhoangtrang(person[i].ten);// vì nó đọc luôn các khoảng trắng nên việc so sánh sẽ không đúng nên sẽ dùng hàm xoakhoangtrang()
         count ++; //biến count để lưu số lượng person
        for (int j = 1; j <= person[i].sl_st; j++)
        {
@@ -104,7 +103,7 @@ void docfile(char sex){
 
 
   //----tìm những thằng giống nhất để in ra--//
- int checkAge(int i){
+ int checkAgeAndHeight(int i){
   if (person[i].tuoi <= person_input.tuoi_right && person[i].tuoi >= person_input.tuoi_left )
   {  
     if ( heightCheck[0] == 't')
@@ -123,12 +122,12 @@ void docfile(char sex){
 }
 void xuat(){
 int dem[100]={0}; 
-int soThuTu_AgeOk[100]; // dung de danh dau nhung ng co do tuoi thoa man yeu cau tìm kiem
+int soThuTu_AgeOk[100]; // dung de danh dau nhung ng co do tuoi và chieu cao thoa man yeu cau tìm kiem
 int ok=0;
-float tiLeHopNhau[100];
+float tiLeHopNhau[100]={0};
 for (int i = 1; i <= count; i++)
   { 
-    if( checkAge(i) == 1 ){
+    if( checkAgeAndHeight(i) == 1 ){
       soThuTu_AgeOk[++ok] = 1;
         for (int  j = 1; j <= soLuongSoThich; j++)
         {
@@ -146,25 +145,44 @@ for (int i = 1; i <= count; i++)
   }
 
 int stt=0;
-int max=dem[1];
-// for (int i = 1; i <= count; i++)
-//   {
-//     if(soThuTu_AgeOk[i]==1)
-//     {
-//       if (dem[i]>max)
-//         {
-//           max =dem[i];
-//         }
-//     }
-//   } 
-// if ( max ==0)
-// {  
-//   printf("Rat tiec :( khong co ai phu hop voi ban ca!\n");
-// } else {
+float max=tiLeHopNhau[1];
+for (int i = 1; i <= count; i++)
+  {
+    if(soThuTu_AgeOk[i]==1)
+    {
+      if (tiLeHopNhau[i]>max)
+        {
+          max =tiLeHopNhau[i];
+        }
+    }
+  } 
+if ( max ==0)
+{  
+  printf("Rat tiec :( khong co ai phu hop voi ban ca!\n");
+} else {
+printf("\n -------------DE XUAT TOT NHAT CHO BAN-------------------\n");
+for(int i=0; i<=count; i++){
+  if( tiLeHopNhau[i] == max ){
+printf("%d. %s | tuoi : %d |so dien thoai : 0%d | chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+             for (int j = 1; j <=person[i].sl_st; j++)
+               {
+                   printf("%s, ",person[i].tenSoThich[j].data);
+               }   
+               printf("\n->> nghe nghiep :");
+
+                  for (int j = 1; j <=person[i].sl_cv; j++)
+                 {
+                    printf(" %s,",person[i].tenCongViec[j].data);
+                 }
+               printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n\n");
+  }
+}
+printf("---------------MOT SO DE XUAT KHAC-------------------\n");
+
 for (int i = 1; i <= count; i++)
   {
      if(soThuTu_AgeOk[i]==1){
-       if ( tiLeHopNhau[i] > 0 )
+       if ( tiLeHopNhau[i] > 0 && tiLeHopNhau[i] != max )
         { 
           printf("%d. %s | tuoi : %d |so dien thoai : 0%d | chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
              for (int j = 1; j <=person[i].sl_st; j++)
@@ -177,11 +195,11 @@ for (int i = 1; i <= count; i++)
                  {
                     printf(" %s,",person[i].tenCongViec[j].data);
                  }
-               printf("\n ti le hop nhau : %.2f %%",tiLeHopNhau[i]); printf("\n\n");
+               printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n\n");
        }
      }
   }
-
+}
 }
 
 
@@ -190,7 +208,7 @@ void nhapKhoangTuoi(){
     printf("nhap khoang tuoi ban muon tim : ");
     scanf("%d %d",&person_input.tuoi_left,&person_input.tuoi_right);
 
-    printf("nhap chieuCao vi du tren 160 :");
+    printf("nhap chieu cao :");
     scanf("%s %d",heightCheck,&height);
 }
 void nhapSdt(){
@@ -199,7 +217,7 @@ void nhapSdt(){
     fflush(stdin);
     scanf("%d",&person_input.sdt);
 
-    printf("nhap chieuCao:");
+    printf("nhap chieu cao:");
     scanf("%d",&height);
 }
 void nhap(char sex[]){
@@ -280,7 +298,7 @@ void inds(){
     printf("\n\n========= DANH SACH MAI MOI ===========\n");
      for (int i = 1; i <= count; i++)
          {
-              printf("%d. %s | tuoi: %d | so dien thoai : 0%d | chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+              printf("%d. %s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
               printf("->> so thich :");
 
              for (int j = 1; j <=person[i].sl_st; j++)
@@ -307,7 +325,7 @@ void Delete(FILE *st){
         } else {
 
                 fprintf(st,"\n0%d %d",person[i].sdt,person[i].tuoi);
-                fprintf(st," %-20s %d %d",person[i].ten,height,soLuongSoThich);
+                fprintf(st," %-20s %d %d",person[i].ten,person[i].chieuCao,person[i].sl_st);
              for (int j = 1; j <=person[i].sl_st; j++)
                  {
                    fprintf(st," %-20s",person[i].tenSoThich[j].data);
@@ -317,7 +335,7 @@ void Delete(FILE *st){
 
                  for (int j = 1; j <=person[i].sl_cv; j++)
                  {
-                   fprintf(st," %-20s",person[i].tenCongViec[i].data);
+                   fprintf(st," %-20s",person[i].tenCongViec[j].data);
                  } 
         }
       }
@@ -350,8 +368,7 @@ void xoaPerson(){
 }
 
 int main(){
-
-
+  
 printf(" _________________________________________________________\n");	
 printf("|                                                         |\n");
 printf("|================= PHAN MEM MAI MOI 2022 =================|\n");
@@ -379,15 +396,14 @@ printf("|                                                             __________
 printf("|                H A V E  A  G O O D D A Y :)                 __________________####\n"); 
 printf("|                                                             __________________###\n");     
 printf("|________________________________________________________________________________#\n");                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                           
+                                                                                                                                                                              
 do {
 		printf("\n\n =============== MENU ===============");
 		  printf("\n|  1. Thuc hien mai moi              |");
 		  printf("\n|  2. Them ban vao danh sach mai moi |");
 		  printf("\n|  3. In ra danh sach mai moi        |");
       printf("\n|  4. Xoa nguoi khoi danh sach       |");
-		  printf("\n|  5. About App                      |");
-      printf("\n|  0. Thoat chuong trinh.            |");
+		  printf("\n|  0. Thoat chuong trinh.            |");
 		  printf("\n|____________________________________|");
 		  printf("\n  Ban chon ? ");
 		char sex[10];
@@ -400,8 +416,8 @@ do {
 				
 			case 1:{
                 printf("\n Ban can nhap cac thong tin sau :");
-                printf("\n1. Ten\t 2. Gioi tinh\t3. Tuoi\t 4. So thich\t5. Cong viec");
-                printf("\n6. Khoang tuoi vi du( 19 25 )\t7. Chieu cao mong muon( vi du tren 160 hoac duoi 170)\n\n");
+                printf("\n1. Ten\n2. Gioi tinh\n3. Tuoi\n4. So thich\n5. Cong viec");
+                printf("\n6. Khoang tuoi vi du( 19 25 )\n7. Chieu cao mong muon( vi du tren 160 hoac duoi 170)\n\n");
 			        	nhap(sex);
                 nhapKhoangTuoi();
                 if (sex[1] == 'a')
@@ -440,10 +456,6 @@ do {
       case 4:
                 xoaPerson();
                 count =0;
-                break;
-      case 5:
-                printf("-----------CODER-----------\n");
-                printf("<3 huynamvn || nhat hoang <3");
                 break;
 			default:
 			        	printf("Sai chuc nang, vui long chon lai!\n");
