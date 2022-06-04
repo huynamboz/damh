@@ -1,4 +1,6 @@
 
-0984 19 hong nhung           179 5 da bong              shoping              cafe                 doc sach             hoc bai              1 sinh vien           
-098765 18 huong                166 6 choi game            du lich              shoping              cafe                 doc sach             danh cau long        1 sin vien            
-0345 24 anh thu              159 4 danh cau long        cafe                 du lich              shopee               2 nhan vien bar        gia su              
+0984 19 hong nhung           179 5 da bong              shoping              cafe                 doc sach             hoc bai               sinh vien           
+098765 18 huong                166 6 choi game            du lich              shoping              cafe                 doc sach             danh cau long         sinh vien              
+0345 24 anh thu              159 4 danh cau long        cafe                 du lich              shopee                sinh vien            
+09876 17 truc                 167 5 du lich              shoping              danh bong chuyen     cafe                 hoc bai               sinh vien           
+0987 16 thu minh             150 4 an com               hoc bai              du lich              da bong               sinh vien           
