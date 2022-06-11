@@ -1,6 +1,5 @@
 
 0987 19 trinh huy nam        180 4 da bong              choi game            danh cau long        du lich              nhan vien cgv       
-0999 19 anh hung             177 5 da bong              du lich              cafe                 doc sach             danh cau long        nhan vien cgv       
+0999 19 anh hung             175 5 da bong              du lich              cafe                 doc sach             danh cau long        nhan vien cgv       
 0898 20 anh dung             179 5 danh bong chuyen     cafe                 du lich              doc sach             da bong              nhan vien cgv       
 0789 18 minh anh             181 4 danh cau long        guitar               shoping              du lich              nhan vien cgv       
-09876 19 hoang anh            190 5 da bong              du lich              doc sach             cafe                 danh bong chuyen     sinh vien           
