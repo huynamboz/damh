@@ -80,8 +80,8 @@ void docdata(FILE *st){
      }
 }
 
-void docfile(char sex){
-  if (sex == 'a')
+void readFile(char gender){
+  if (gender == 'a')
   {
       FILE *st = fopen("nam.txt","r");
       docdata(st);
@@ -118,7 +118,7 @@ void docfile(char sex){
   } else return 0;
   
 }
-void xuat(){
+void showResult(){
 int dem[100]={0}; 
 int soThuTu_AgeOk[100]; // dung de danh dau nhung ng co do tuoi và chieu cao thoa man yeu cau tìm kiem
 int ok=0;
@@ -158,10 +158,10 @@ if ( max ==0)
 {  
   printf("Rat tiec :( khong co ai phu hop voi ban ca!\n");
 } else {
-printf("\n -------------DE XUAT TOT NHAT CHO BAN-------------------\n");
+printf("\n ------------------------------------>>DE XUAT TOT NHAT CHO BAN<<------------------------------\n\n");
 for(int i=0; i<=count; i++){
   if( tiLeHopNhau[i] == max ){
-printf("%d. %s | tuoi : %d |so dien thoai : 0%d | chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+printf("%d. %-20s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
              for (int j = 1; j <=person[i].sl_st; j++)
                {
                    printf("%s, ",person[i].tenSoThich[j].data);
@@ -169,17 +169,19 @@ printf("%d. %s | tuoi : %d |so dien thoai : 0%d | chieu cao : %dcm\n->> So thich
                printf("\n->> nghe nghiep :");
 
                     printf(" %s,",person[i].tenCongViec);
-               printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n\n");
+               printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n");
+               printf("\n-----------------------------------------------------------------------------------------\n");
   }
-}
-printf("---------------MOT SO DE XUAT KHAC-------------------\n");
+} 
+  printf("\n                                ##-----------------------##");
+  printf("\n                                  >>MOT SO DE XUAT KHAC<<\n\n");
 
 for (int i = 1; i <= count; i++)
   {
      if(soThuTu_AgeOk[i]==1){
        if ( tiLeHopNhau[i] > 0 && tiLeHopNhau[i] != max )
         { 
-          printf("%d. %s | tuoi : %d |so dien thoai : 0%d | chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+          printf("%d. %-20s  |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
              for (int j = 1; j <=person[i].sl_st; j++)
                {
                    printf("%s, ",person[i].tenSoThich[j].data);
@@ -187,8 +189,9 @@ for (int i = 1; i <= count; i++)
                printf("\n->> nghe nghiep :");
 
                     printf(" %s,",person[i].tenCongViec);
-               printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n\n");
-       }
+               printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n");
+               printf("\n------------------------------------------------------------------------------------------\n");
+       } 
      }
   }
 }
@@ -196,38 +199,38 @@ for (int i = 1; i <= count; i++)
 
 
 //--code đọc data nhập vào---//  
-void nhapKhoangTuoi(){
-    printf("8.nhap khoang tuoi ban muon tim : ");
+void inputInfor_age(){
+    printf("8. Nhap khoang tuoi ban muon tim -> ");
     scanf("%d %d",&person_input.tuoi_left,&person_input.tuoi_right);
 
-    printf("9.nhap chieu cao :");
+    printf("9. Nhap chieu cao ban muon tim vd: tren 160 hoac duoi 150 -> ");
     scanf("%s %d",heightCheck,&height);
 }
 
-void nhap(char sex[]){
+void inputInfor(char gender[]){
    
 
-    printf("1.Nhap ten : ");
+    printf("1. Nhap ten -> ");
     fflush(stdin);
     gets(person_input.ten);
 
-    printf("2.Nhap gioi tinh : ");
+    printf("2. Nhap gioi tinh -> ");
     fflush(stdin);
-    scanf("%s",sex);
+    scanf("%s",gender);
 
-    printf("3.Nhap tuoi : ");
+    printf("3. Nhap tuoi -> ");
     scanf("%d",&person_input.tuoi);
 
-    printf("4.Nhap so dien thoai : ");
+    printf("4. Nhap so dien thoai -> ");
     fflush(stdin);
     scanf("%d",&person_input.sdt);
 
-    printf("5.Nhap chieu cao cua ban : ");
+    printf("5. Nhap chieu cao cua ban -> ");
     scanf("%d",&height);
 
-    printf("6.Nhap so luong so thich : ");
+    printf("6. Nhap so luong so thich -> ");
     scanf("%d",&soLuongSoThich);
-    printf("Nhap so thich: \n");
+    printf(" Nhap so thich: \n");
     for (int i = 1; i <= soLuongSoThich; i++)
     {
       printf("-> ");
@@ -235,7 +238,7 @@ void nhap(char sex[]){
       gets(person_input.tensoThich_input[i].data_c);
     }
 
-      printf("7.Nhap nghe nghiep : ");
+      printf("7. Nhap nghe nghiep -> ");
       fflush(stdin);
       gets(person_input.tenCongViec_input);
 }
@@ -259,8 +262,8 @@ void ghidata(FILE *st){
 }
 
 
-void ghifile(char sex){
-    if (sex == 'u')
+void writeFile(char gender){
+    if (gender == 'u')
     {
         FILE *st = fopen("nu.txt","a");
         ghidata(st);
@@ -274,35 +277,36 @@ void ghifile(char sex){
 }
 
 //====hàm in ra danh sách
-void inds(){
+void listPerson(){
     int stt=0;
-    printf("\n\n ===================================DANH SACH MAI MOI============================================\n");
+    printf("\n                                     >> DANH SACH MAI MOI <<                                           ");
+    printf("\n=====================================================================================================\n");
      for (int i = 1; i <= count; i++)
          {
-              printf("%d. %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
-              printf("->> so thich    :");
+              printf(" %d. %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+              printf(" ->> so thich    :");
 
              for (int j = 1; j <=person[i].sl_st; j++)
                  {
                     printf(" %s,",person[i].tenSoThich[j].data);
                  } 
 
-                  printf("\n->> nghe nghiep :");
+                  printf("\n ->> nghe nghiep :");
 
                     printf(" %s,",person[i].tenCongViec);
-                 printf("\n=================================================================================================\n");
+                 printf("\n=====================================================================================================\n");
            }
 }
 int deleted;
-void Delete(FILE *st){
-     
+int Delete(FILE *st){
+     int dem=0;
       for (int i = 1; i <= count; i++)
       {
         if(person_input.sdt == person[i].sdt){
           deleted = i;
           continue;
         } else {
-
+                dem++;
                 fprintf(st,"\n0%d %d",person[i].sdt,person[i].tuoi);
                 fprintf(st," %-20s %d %d",person[i].ten,person[i].chieuCao,person[i].sl_st);
              for (int j = 1; j <=person[i].sl_st; j++)
@@ -312,31 +316,38 @@ void Delete(FILE *st){
 
                    fprintf(st," %-20s",person[i].tenCongViec);
         }
-      }
+      } return dem;
+
      
 }
-void xoaPerson(){
+void deletePerson(){
   FILE *st;
-  char sex[5];
+  char gender[5];
   printf("Ban mua xoa nam hay nu : ");
   fflush(stdin);
-  scanf("%s",sex);
+  scanf("%s",gender);
   printf("Nhap so dien thoai nguoi ban muon xoa : ");
   fflush(stdin);
   scanf("%d",&person_input.sdt);
-  if ( sex[1] == 'u')
+  if ( gender[1] == 'u')
     {
-      docfile('u');
+      readFile('u');
       st = fopen("nu.txt","w");
-      Delete(st);
-      printf("======== BAN VUA XOA THANH CONG ========\n");
-      printf("%s | tuoi : %d | so dien thoai : 0%d",person[deleted].ten,person[deleted].tuoi,person[deleted].sdt);
-    } else  if ( sex[1] == 'a'){
-        docfile('a');
+      if ( Delete(st) != count ) {
+      printf("BAN VUA XOA THANH CONG ->> ");
+      printf("%s | so dien thoai : 0%d",person[deleted].ten,person[deleted].sdt);
+      } else {
+        printf("\n>>>>KHONG CO THONG TIN NGUOI CAN XOA");
+      }
+    } else  if ( gender[1] == 'a'){
+        readFile('a');
         st = fopen("nam.txt","w");
-        Delete(st);
-        printf("\n======== BAN VUA XOA THANH CONG ========\n");
-        printf("%s | tuoi : %d | so dien thoai : 0%d",person[deleted].ten,person[deleted].tuoi,person[deleted].sdt);
+         if ( Delete(st) != count ) {
+       printf("BAN VUA XOA THANH CONG ->> ");
+      printf("%s | so dien thoai : 0%d",person[deleted].ten,person[deleted].sdt);
+         } else {
+        printf("\n>>>>KHONG CO THONG TIN NGUOI CAN XOA");
+      }
     }
         fclose(st);
 }
@@ -405,43 +416,44 @@ void reWriteData(FILE *st){
                    fprintf(st," %-20s",person[i].tenCongViec);
         
            }
-           printf("\n\t.......SUA THONG TIN THANH CONG :>........\n");
+           printf("\n.......SUA THONG TIN THANH CONG :>........\n");
         break;
         } else dem++;
       }
        if (dem == count)
         {
-          printf("\n----KHONG CO THONG TIN NGUOI CAN SUA-----\n");
+          printf("\n----KHONG CO THONG TIN NGUOI CAN SUA :<<-----\n");
         }
 }
 
 void editData(){
   FILE *st;
-       char sex[5];
+       char gender[5];
   printf("Ban mua sua thong tin nam hay nu : ");
   fflush(stdin);
-  scanf("%s",sex);
+  scanf("%s",gender);
   printf("Nhap so dien thoai nguoi ban muon sua thong tin : ");
   fflush(stdin);
   scanf("%d",&person_input.sdt);
   
-  if ( sex[1] == 'u')
+  if ( gender[1] == 'u')
     {
-      docfile('u');     
+      readFile('u');     
       st = fopen("nu.txt","r+");
       reWriteData(st);
       fclose(st);
-    } else if ( sex[1] == 'a'){
-      docfile('a');
+    } else if ( gender[1] == 'a'){
+      readFile('a');
       st = fopen("nam.txt","r+");
       reWriteData(st);
       fclose(st);
+    } else {
+      printf("---->Nhap sai gioi tinh<-----");
     }
     
 }
 
-int main(){
-  
+void Title(){
 printf(" ____________________________________________DO AN PBL_______________________________________________\n");	
 printf("|                                         lOP: 21TCLC_DT4                                            |\n");
 printf("|                         SINH VIEN THUC HIEN: TRINH HUY NAM | NGUYEN DAC NHAT HOANG                 |\n");
@@ -469,9 +481,10 @@ printf("|                                                             __________
 printf("|                                                             _________________######\n");
 printf("|                H A V E  A  G O O D D A Y :)                 __________________####\n"); 
 printf("|                                                             __________________###\n");     
-printf("|________________________________________________________________________________#\n");                                                                                                                                                                                                                                                 
-                                                                                                                                                                              
-do {
+printf("|________________________________________________________________________________#\n");   
+}
+
+void DisplayMenu(){
 printf("\n\n ============================================= MENU ================================================");
 printf("\n|                                   1. Thuc hien mai moi                                            |");
 printf("\n|                                   2. Them ban vao danh sach mai moi                               |");
@@ -480,25 +493,19 @@ printf("\n|                                   4. Xoa nguoi khoi danh sach       
 printf("\n|                                   5. Chinh sua thong tin                                          |");
 printf("\n|                                   0. Thoat chuong trinh.                                          |");
 printf("\n|___________________________________________________________________________________________________|");
-printf("\n  Ban chon ? ");
-		char sex[10];
-		scanf("%d",&chon);
-	
-		
-		switch(chon) {
-			case 0:
-			        	break;
-				
-			case 1:{
-			        	nhap(sex);
-                nhapKhoangTuoi();
-                if (sex[1] == 'a')
+}
+
+
+int findLove(char gender[]){
+                inputInfor(gender);
+                inputInfor_age();
+                if (gender[1] == 'a')
                 {
-                 docfile('u');
-                } else  if (sex[1] == 'u') docfile('a');
+                 readFile('u');
+                } else  if (gender[1] == 'u') readFile('a');
                 else {
                   printf("Nhap sai gioi tinh");
-                  break;
+                  return 0;
                 }
 			        	printf("Ban co muon them ban vao du lieu mai moi khong\nneu co nhan (y) neu khong nhan (n): ");
                 char yesno;
@@ -506,37 +513,53 @@ printf("\n  Ban chon ? ");
                 scanf("%c",&yesno);
                 if (yesno == 'y')
                 {
-                  ghifile(sex[1]);
+                  writeFile(gender[1]);
                 }
-                
-                // search(dem);
-                if (sex[1]== 'u')
-                {
-                     printf("\n-------Nhung chang trai hop voi ban <3---------\n\n");
-                } else printf("\n-------Nhung co gai hop voi ban <3---------\n\n");
-                
-                xuat();
+                showResult();
+}
+
+void showList(char gender[]){
+                printf("Ban muon in ra danh sach nam hay nu: ");
+                scanf("%s",gender);
+                readFile(gender[1]);
+                listPerson();
+                count=0;
+}
+
+void addPerson(char gender[]){
+                inputInfor(gender);
+                writeFile(gender[1]);
+                printf("\t\t\n<.....GHI THANH CONG....>\n");
+}
+
+void ChooseFuntion(){
+                                                                                                                                                                               
+do {
+    char gender[10];
+    DisplayMenu();
+    printf("\nBan chon ? ");  	scanf("%d",&chon);
+		switch(chon) {
+
+			case 0:
+			        	break;
+				
+			case 1:{
+			        	findLove(gender);
                 count=0;
 			        	break;
             }
 
 			case 2:
-			        	nhap(sex);
-                ghifile(sex[1]);
-                printf("\t\t\n<.....GHI THANH CONG....>\n");
+			        	addPerson(gender);
                 count =0;
 			        	break;
 				
 			case 3:
-                printf("Ban muon in ra danh sach nam hay nu: ");
-                scanf("%s",sex);
-                docfile(sex[1]);
-                inds();
-                count=0;
+                showList(gender);
 			        	break;
 
-      case 4:
-                xoaPerson();
+      case 4:   
+                deletePerson();
                 count =0;
                 break;
 
@@ -548,7 +571,14 @@ printf("\n  Ban chon ? ");
 			default:
 			        	printf("Sai chuc nang, vui long chon lai!\n");
 			        	break;
+
 		}
 	} while(chon);
-	return 0;
+}
+
+int main(){
+  
+   Title();                                                                                                                                                                                                                                           
+   ChooseFuntion();
+   return 0;
 }

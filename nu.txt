@@ -1,7 +1,5 @@
 
-0984 19 hong nhung           179 5 da bong              shoping              cafe                 doc sach             hoc bai              sinh vien           
-098765 18 huong                166 6 choi game            du lich              shoping              cafe                 doc sach             danh cau long        sinh vien           
-0345 24 anh thu              159 4 danh cau long        cafe                 du lich              shopee               sinh vien           
-09876 17 truc                 167 5 du lich              shoping              danh bong chuyen     cafe                 hoc bai              sinh vien           
-0987 16 thu minh             150 4 an com               hoc bai              du lich              da bong              sinh vien           
-00 0                      0 0 sdfdf               
+01234 17 h                    160 4 da bong              choi game            du lich              cafe                 sinh vien           
+01 1 haha                 150 3 a                    b                    v                    1                   
+012 1 a                    1 4 da bong              du lich              danh bong chuyen     choi game            a                   
+0999 19 ha                   150 4 da bong              du lich              choi game            danh bong chuyen     sinh vien           
