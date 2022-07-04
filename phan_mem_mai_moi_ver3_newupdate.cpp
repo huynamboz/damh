@@ -1,13 +1,11 @@
 #include<stdio.h>
 #include <string.h>
 #include<conio.h>
-#include<time.h>
 #define space ' '
 
 int count=0; // so luong person
 int soLuongSoThich; //so luong so thich nguoi dung nhap vao
 int height; // chieu cao nguoi dùng nhập vào
-//int soLuongCongViec; //so luong cong viec, nghe nghiep input
 int chon;
 char heightCheck[6]; // check xem người dùng muốn trên hay dưới ví dụ tren 160 hoac duoi 170 ( chiều cao)
 
@@ -19,8 +17,7 @@ struct noiDung
 
 struct infoPerson
 {
-    int sl_st; // sô lượng sở thích của từng thằng
-   // int sl_cv; // số luong công viec(nghề nghiệp)
+    int sl_st; // sô lượng sở thích của từng người
     noiDung tenSoThich[10]; //từng sở thích của mỗi person[i]
     char tenCongViec[50];
     int chieuCao;
@@ -158,7 +155,7 @@ if ( max ==0)
 {  
   printf("Rat tiec :( khong co ai phu hop voi ban ca!\n");
 } else {
-printf("\n ------------------------------------>>DE XUAT TOT NHAT CHO BAN<<------------------------------\n\n");
+printf("\n                            <<--- DE XUAT TOT NHAT CHO BAN --->> \n\n");
 for(int i=0; i<=count; i++){
   if( tiLeHopNhau[i] == max ){
 printf("%d. %-20s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
@@ -173,8 +170,8 @@ printf("%d. %-20s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->>
                printf("\n-----------------------------------------------------------------------------------------\n");
   }
 } 
-  printf("\n                                ##-----------------------##");
-  printf("\n                                  >>MOT SO DE XUAT KHAC<<\n\n");
+printf("\n                                ##-----------------------##");
+printf("\n                                 >> MOT SO DE XUAT KHAC <<    \n\n");
 
 for (int i = 1; i <= count; i++)
   {
@@ -334,6 +331,7 @@ void deletePerson(){
       readFile('u');
       st = fopen("nu.txt","w");
       if ( Delete(st) != count ) {
+      printf("\n");
       printf("BAN VUA XOA THANH CONG ->> ");
       printf("%s | so dien thoai : 0%d",person[deleted].ten,person[deleted].sdt);
       } else {
@@ -343,6 +341,7 @@ void deletePerson(){
         readFile('a');
         st = fopen("nam.txt","w");
          if ( Delete(st) != count ) {
+       printf("\n");
        printf("BAN VUA XOA THANH CONG ->> ");
       printf("%s | so dien thoai : 0%d",person[deleted].ten,person[deleted].sdt);
          } else {
@@ -352,7 +351,7 @@ void deletePerson(){
         fclose(st);
 }
 
-void reWriteData(FILE *st){
+void rewriteData(FILE *st){
   int dem=0;
   for (int i = 1; i <= count; i++)
       {
@@ -367,9 +366,24 @@ void reWriteData(FILE *st){
         printf("\n Ban muon sua thong tin nao : ");
         int choose;
         scanf("%d",&choose);
+        printf("\n                                 <<---THONG TIN CA NHAN HIEN TAI--->>\n\n");
+        for (int j = i; j < i+1; j++)
+         {
+              printf(" %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",person[j].ten,person[j].tuoi,person[j].sdt,person[j].chieuCao);
+              printf(" ->> so thich    :");
+
+             for (int f = 1; f <=person[j].sl_st; f++)
+                 {
+                    printf(" %s,",person[j].tenSoThich[f].data);
+                 } 
+
+                  printf("\n ->> nghe nghiep :");
+
+                    printf(" %s,",person[j].tenCongViec);
+           }
         switch ( choose )
         {
-        case 1 :  printf("-> Nhap ten moi : ");
+        case 1 :  printf("\n\n-> Nhap ten moi : ");
                   fflush(stdin);
                   gets(person[i].ten);
                   break;
@@ -405,6 +419,22 @@ void reWriteData(FILE *st){
         default:
                   break;
         }
+        printf("\n................................SUA THONG TIN CA NHAN THANH CONG :>................................");
+        printf("\n                                    THONG TIN CA NHAN MOI                                       \n\n");
+        for (int j = i; j < i+1; j++)
+         {
+              printf(" %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",person[j].ten,person[j].tuoi,person[j].sdt,person[j].chieuCao);
+              printf(" ->> so thich    :");
+
+             for (int f = 1; f <=person[j].sl_st; f++)
+                 {
+                    printf(" %s,",person[j].tenSoThich[f].data);
+                 } 
+
+                  printf("\n ->> nghe nghiep :");
+
+                    printf(" %s,",person[j].tenCongViec);
+           }
         for (int i = 1; i <= count; i++)
            {
                 fprintf(st,"\n0%d %d",person[i].sdt,person[i].tuoi);
@@ -416,7 +446,6 @@ void reWriteData(FILE *st){
                    fprintf(st," %-20s",person[i].tenCongViec);
         
            }
-           printf("\n.......SUA THONG TIN THANH CONG :>........\n");
         break;
         } else dem++;
       }
@@ -440,12 +469,12 @@ void editData(){
     {
       readFile('u');     
       st = fopen("nu.txt","r+");
-      reWriteData(st);
+      rewriteData(st);
       fclose(st);
     } else if ( gender[1] == 'a'){
       readFile('a');
       st = fopen("nam.txt","r+");
-      reWriteData(st);
+      rewriteData(st);
       fclose(st);
     } else {
       printf("---->Nhap sai gioi tinh<-----");
@@ -532,7 +561,7 @@ void addPerson(char gender[]){
                 printf("\t\t\n<.....GHI THANH CONG....>\n");
 }
 
-void ChooseFuntion(){
+void chooseFuntion(){
                                                                                                                                                                                
 do {
     char gender[10];
@@ -579,6 +608,6 @@ do {
 int main(){
   
    Title();                                                                                                                                                                                                                                           
-   ChooseFuntion();
+   chooseFuntion();
    return 0;
 }
