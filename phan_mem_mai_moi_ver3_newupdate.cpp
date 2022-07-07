@@ -163,7 +163,7 @@ printf("%d. %-20s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->>
 
                     printf(" %s,",person[i].tenCongViec);
                printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n");
-               printf("\n-----------------------------------------------------------------------------------------\n");
+               printf("\n----------------------------------------------------------------------------------------------------\n");
   }
 } 
 printf("\n                                ##-----------------------##");
@@ -184,7 +184,7 @@ for (int i = 1; i <= count; i++)
 
                     printf(" %s,",person[i].tenCongViec);
                printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n");
-               printf("\n------------------------------------------------------------------------------------------\n");
+               printf("\n----------------------------------------------------------------------------------------------------\n");
                gioiHan++;
                if(gioiHan == 6 ) break;
        } 
@@ -389,13 +389,13 @@ void rewriteData(FILE *st){
                   gets(person[i].ten);
                   break;
 
-        case 2 :  printf("-> Nhap lai tuoi moi : ");
+        case 2 :  printf("\n\n-> Nhap lai tuoi moi : ");
                   scanf("%d",&person[i].tuoi);
                   break;
         
-        case 3 :  printf("-> Nhap so luong so thich : ");
+        case 3 :  printf("\n\n-> Nhap so luong so thich : ");
                   scanf("%d",&person[i].sl_st);
-                  printf("-> Nhap so thich moi<-\n");
+                  printf("-> Nhap so thich moi: \n");
                  for (int j = 1; j <= person[i].sl_st; j++)
                     {
                      printf("-> ");
@@ -404,16 +404,16 @@ void rewriteData(FILE *st){
                      }
                     break;
 
-        case 4:   printf("-> Nhap lai nghe nghiep : ");
+        case 4:   printf("\n\n-> Nhap lai nghe nghiep : ");
                   fflush(stdin);
                   gets(person[i].tenCongViec);
                   break;
 
-        case 5 :  printf("-> Nhap lai so dien thoai moi : ");
+        case 5 :  printf("\n\n-> Nhap lai so dien thoai moi : ");
                   scanf("%d",&person[i].sdt);
                   break;
 
-        case 6 :  printf("-> Nhap lai chieu cao moi : ");
+        case 6 :  printf("\n\n-> Nhap lai chieu cao moi : ");
                   scanf("%d",&person[i].chieuCao);
                   break;
 

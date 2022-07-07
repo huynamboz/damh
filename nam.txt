@@ -6,3 +6,5 @@
 0789765256 21 Hoang Anh Chau       168 4 choi game            cafe                 du lich              danh bong chuyen     sinh vien           
 0789876543 27 Le Van Anh Duong     188 4 du lich              cafe                 danh cau long        danh bong chuyen     ky su               
 0324998877 30 Le Tuan Anh          174 5 da bong              du lich              danh cau long        cafe                 doc sach             ky su IT            
+0678987543 22 Le Tien Hoang        1 5 du lich              nghe nhac            doc sach             shoping              da bong              bao ve              
+0987123332 25 Le Van Anh Khoa      1 5 du lich              doc sach             choi game            nghe nhac            cafe                 sinh vien bk        

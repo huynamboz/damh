@@ -1,4 +1,7 @@
 
-01234 17 hj                   160 4 da bong              choi game            du lich              cafe                 sinh vien           
-012 1 a                    1 4 da bong              du lich              danh bong chuyen     choi game            a                   
-0999 19 ha                   150 4 da bong              du lich              choi game            danh bong chuyen     sinh vien           
+0978456789 19 Nguyen Thi Huong     164 5 da bong              hoc bai              cafe                 du lich              shoping              sinh vien           
+0978345654 20 Tran Thi Thu         159 5 shoping              du lich              choi game            di dao               cafe                 sinh vien           
+0789345654 26 Le Thi Huong         160 5 du lich              shoping              danh bong chuyen     choi game            cafe                 nhan vien cgv       
+0789235432 28 Le Thu Hoai          161 5 du lich              cafe                 danh bong chuyen     doc sach             nghe nhac            thu ky              
+0987678123 21 Nguyen Thi Hue       160 4 du lich              nghe nhac            doc sach             cafe                 thu ngan            
+0945187333 22 Nguyen Anh Thu       1 5 cafe                 doc sach             du lich              shoping              xem phim             sinh vien           
