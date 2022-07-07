@@ -20,9 +20,7 @@ struct infoPerson
     int sl_st; //số lượng sở thích của từng người
     noiDung tenSoThich[10]; 
     char tenCongViec[50];
-    int chieuCao;
-    int tuoi;
-    int sdt;
+    int chieuCao,tuoi,sdt;
     char ten[50];
 };
 
@@ -37,11 +35,9 @@ struct infoPerson_input
 {
     noiDungCheck tensoThich_input[10];
     char tenCongViec_input[15];
-    char ten[50]; // tên đứa vừa nhập
-    int tuoi;// tuoi scanf
-    int tuoi_right;
-    int tuoi_left;
-    int sdt;
+    char ten[50];
+    int tuoi,sdt;
+    int tuoi_right,tuoi_left;
 };
 //---------------------------//
 
