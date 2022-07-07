@@ -3,11 +3,11 @@
 #include<conio.h>
 #define space ' '
 
-int count=0; // so luong person
-int soLuongSoThich; //so luong so thich nguoi dung nhap vao
-int height; // chieu cao nguoi dùng nhập vào
-int chon;
-char heightCheck[6]; // check xem người dùng muốn trên hay dưới ví dụ tren 160 hoac duoi 170 ( chiều cao)
+int count=0; //so luong người trong danh sách
+int soLuongSoThich; //số lượng sở thích của người dùng nhập từ bàn phím
+int height; //chiều cao người dùng nhập từ bàn phím
+int chon; //chọn chức năng trong menu
+char heightCheck[6]; //kiểm tra lọc theo chiều cao
 
 
 struct noiDung
@@ -17,8 +17,8 @@ struct noiDung
 
 struct infoPerson
 {
-    int sl_st; // sô lượng sở thích của từng người
-    noiDung tenSoThich[10]; //từng sở thích của mỗi person[i]
+    int sl_st; //số lượng sở thích của từng người
+    noiDung tenSoThich[10]; 
     char tenCongViec[50];
     int chieuCao;
     int tuoi;
@@ -45,7 +45,7 @@ struct infoPerson_input
 };
 //---------------------------//
 
-void xoakhoangtrang (char s[]){ 
+void deleteSpace(char s[]){ 
 {
     int i = strlen (s) - 1 ;
     while (s[i] == space && i >= 0)
@@ -59,34 +59,34 @@ infoPerson person[100];
 infoPerson_input person_input; 
 
 //---code đọc data từ file--//
-void docdata(FILE *st){
+void readData(FILE *st){
   int i=0;
   while(!feof(st))
      {
       i++;
       fscanf(st,"%d %d %20[^\n] %d %d",&person[i].sdt,&person[i].tuoi,&person[i].ten,&person[i].chieuCao,&person[i].sl_st); 
-       xoakhoangtrang(person[i].ten);// vì nó đọc luôn các khoảng trắng nên việc so sánh sẽ không đúng nên sẽ dùng hàm xoakhoangtrang()
+       deleteSpace(person[i].ten);// vì nó đọc luôn các khoảng trắng nên việc so sánh sẽ không đúng nên sẽ dùng hàm deleteSpace()
         count ++; //biến count để lưu số lượng person
        for (int j = 1; j <= person[i].sl_st; j++)
        {
              fscanf(st," %20[^\n]",person[i].tenSoThich[j].data);
-         xoakhoangtrang(person[i].tenSoThich[j].data);
+         deleteSpace(person[i].tenSoThich[j].data);
        }
          fscanf(st," %20[^\n]",person[i].tenCongViec);
-         xoakhoangtrang(person[i].tenCongViec);
+         deleteSpace(person[i].tenCongViec);
      }
 }
 
 void readFile(char gender){
   if (gender == 'a')
   {
-      FILE *st = fopen("nam.txt","r");
-      docdata(st);
+      FILE *st = fopen("nam.txt","a+");
+      readData(st);
       fclose(st); count--;
      
   } else {
-      FILE *st = fopen("nu.txt","r");
-      docdata(st);
+      FILE *st = fopen("nu.txt","a+");
+      readData(st);
       fclose(st); count--;
   }
 }
@@ -172,9 +172,10 @@ printf("%d. %-20s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->>
 } 
 printf("\n                                ##-----------------------##");
 printf("\n                                 >> MOT SO DE XUAT KHAC <<    \n\n");
-
+int gioiHan =0;
 for (int i = 1; i <= count; i++)
   {
+    
      if(soThuTu_AgeOk[i]==1){
        if ( tiLeHopNhau[i] > 0 && tiLeHopNhau[i] != max )
         { 
@@ -188,6 +189,8 @@ for (int i = 1; i <= count; i++)
                     printf(" %s,",person[i].tenCongViec);
                printf("\n TI LE HOP NHAU : %.2f %%",tiLeHopNhau[i]); printf("\n");
                printf("\n------------------------------------------------------------------------------------------\n");
+               gioiHan++;
+               if(gioiHan == 6 ) break;
        } 
      }
   }
@@ -242,7 +245,7 @@ void inputInfor(char gender[]){
 //---kết thúc code đọc data nhập vào--//
 
 //ghi thêm dữ liệu mới vào file
-void ghidata(FILE *st){
+void writeData(FILE *st){
          for (int i = 1; i <2; i++)
            {
                 fprintf(st,"\n0%d %d",person_input.sdt,person_input.tuoi);
@@ -263,12 +266,12 @@ void writeFile(char gender){
     if (gender == 'u')
     {
         FILE *st = fopen("nu.txt","a");
-        ghidata(st);
+        writeData(st);
         fclose(st);
     } 
     else {
         FILE *st = fopen("nam.txt","a");
-        ghidata(st);
+        writeData(st);
         fclose(st);
     }
 }
@@ -278,6 +281,8 @@ void listPerson(){
     int stt=0;
     printf("\n                                     >> DANH SACH MAI MOI <<                                           ");
     printf("\n=====================================================================================================\n");
+    if (count == 0) 
+      printf("                                      DANH SACH CHUA CO AI!                     ");
      for (int i = 1; i <= count; i++)
          {
               printf(" %d. %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
