@@ -154,7 +154,7 @@ if ( max ==0)
 printf("\n                            <<--- DE XUAT TOT NHAT CHO BAN --->> \n\n");
 for(int i=0; i<=count; i++){
   if( tiLeHopNhau[i] == max ){
-printf("%d. %-20s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+printf("%d. %-15s |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
              for (int j = 1; j <=person[i].sl_st; j++)
                {
                    printf("%s, ",person[i].tenSoThich[j].data);
@@ -175,7 +175,7 @@ for (int i = 1; i <= count; i++)
      if(soThuTu_AgeOk[i]==1){
        if ( tiLeHopNhau[i] > 0 && tiLeHopNhau[i] != max )
         { 
-          printf("%d. %-20s  |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+          printf("%d. %-15s  |  tuoi : %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n->> So thich : ",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
              for (int j = 1; j <=person[i].sl_st; j++)
                {
                    printf("%s, ",person[i].tenSoThich[j].data);
@@ -281,7 +281,7 @@ void listPerson(){
       printf("                                      DANH SACH CHUA CO AI!                     ");
      for (int i = 1; i <= count; i++)
          {
-              printf(" %d. %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
+              printf(" %d. %-15s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",++stt,person[i].ten,person[i].tuoi,person[i].sdt,person[i].chieuCao);
               printf(" ->> so thich    :");
 
              for (int j = 1; j <=person[i].sl_st; j++)
@@ -370,7 +370,7 @@ void rewriteData(FILE *st){
         printf("\n                                 <<---THONG TIN CA NHAN HIEN TAI--->>\n\n");
         for (int j = i; j < i+1; j++)
          {
-              printf(" %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",person[j].ten,person[j].tuoi,person[j].sdt,person[j].chieuCao);
+              printf(" %-15s |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",person[j].ten,person[j].tuoi,person[j].sdt,person[j].chieuCao);
               printf(" ->> so thich    :");
 
              for (int f = 1; f <=person[j].sl_st; f++)
@@ -424,7 +424,7 @@ void rewriteData(FILE *st){
         printf("\n                                    THONG TIN CA NHAN MOI                                       \n\n");
         for (int j = i; j < i+1; j++)
          {
-              printf(" %-20s  |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",person[j].ten,person[j].tuoi,person[j].sdt,person[j].chieuCao);
+              printf(" %-15s |  tuoi: %d  |  so dien thoai : 0%d  |  chieu cao : %dcm\n",person[j].ten,person[j].tuoi,person[j].sdt,person[j].chieuCao);
               printf(" ->> so thich    :");
 
              for (int f = 1; f <=person[j].sl_st; f++)
